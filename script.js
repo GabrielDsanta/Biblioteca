@@ -12,7 +12,7 @@ let choice2
 
 
 while(choice){
-    choice2 = prompt("1 /// Cadastrar Livro /// 2 Procurar Livro Pelo Autor /// 3 Procurar Livros Pelo Ano /// 4 Finalizar")
+    choice2 = prompt("1 /// Cadastrar Livro /// 2 Procurar Livro Pelo Autor /// 3 Procurar Livros Pelo Ano /// 4 Procurar Livros de um Autor a partir de determinado Ano /// 5 Finalizar")
     if(choice2 == "1"){
         cadastro()
     }
@@ -26,6 +26,10 @@ while(choice){
     }
 
     if(choice2 == "4"){
+        ShowBooksByAutorAndYear()
+    }
+
+    if(choice2 == "5"){
         choice = false
     }
 }
@@ -49,7 +53,9 @@ function ShowBooksByAutor(){
             contador2++
         }
     }
-
+    if(contador2 <= 0){
+        return alert("Você inseriu um Autor inválido")
+    }
     return alert(`Os Livros do Autor ${autor}: ${LivrosAutorX}`)
 }
 
@@ -64,5 +70,44 @@ function ShowBooksByYear(){
         }
     }
 
+    if(contador3 <= 0){
+        return alert("Você inseriu um Ano inválido")
+    }
+
     return alert(`Os Livros do Ano ${ano}: ${LivrosAnoX}`)
+}
+
+function ShowBooksByAutorAndYear(){
+    let contador4 = 0
+    let contador5 = 0
+    let ano2
+    let LivrosAnoAutorX = []
+    let Limite = 1
+
+    let autor2 = prompt("Qual o nome do Autor ?")
+    for(let index4 = 0; index4 < Limite; index4++){
+        if(autor2 == bookWriter[index4]){
+            ano2 = prompt("A Partir de qual Ano você quer ver os livros desse Autor ?")
+            for(let index5 = 0; index5 < bookYear.length; index5++){
+                if(bookYear[index5] >= ano2){
+                    LivrosAnoAutorX[contador5] = bookName[index5]
+                    contador5++
+                }
+
+                if(contador5 <= 0){
+                    return alert("Você digitou um valor inválido")
+                }
+            }
+        }
+
+        else{
+            Limite++
+            contador4++
+        }
+    }
+
+    if(contador4 > 0){
+        return alert("Você digitou um Autor inválido")
+    }
+    return alert(`Os Livros do Autor ${autor2} a partir do Ano ${ano2} são: ${LivrosAnoAutorX}`)
 }
