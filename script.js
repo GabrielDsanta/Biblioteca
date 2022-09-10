@@ -12,7 +12,7 @@ let choice2
 
 
 while(choice){
-    choice2 = prompt("1 /// Cadastrar Livro /// 2 Procurar Livro Pelo Autor /// 3 Procurar Livros Pelo Ano /// 4 Procurar Livros de um Autor a partir de determinado Ano /// 5 Finalizar")
+    choice2 = prompt("1 /// Cadastrar Livro /// 2 Procurar Livro Pelo Autor /// 3 Procurar Livros Pelo Ano /// 4 Procurar Livros de um Autor a partir de determinado Ano /// 5 Buscar um Livro pelo nome e seus Idiomas /// 6 Finalizar")
     if(choice2 == "1"){
         cadastro()
     }
@@ -30,6 +30,10 @@ while(choice){
     }
 
     if(choice2 == "5"){
+        ShowBooksByNameAndLanguage()
+    }
+
+    if(choice2 == "6"){
         choice = false
     }
 }
@@ -110,4 +114,25 @@ function ShowBooksByAutorAndYear(){
         return alert("Você digitou um Autor inválido")
     }
     return alert(`Os Livros do Autor ${autor2} a partir do Ano ${ano2} são: ${LivrosAnoAutorX}`)
+}
+
+function ShowBooksByNameAndLanguage(){
+    let times = 0
+    let idiomas = []
+    let nomeBook = prompt("Qual o nome do Livro ?")
+    for(let for1 = 0; for1 < bookName.length; for1++){
+        if(nomeBook == bookName[for1]){
+            idiomas[for1] = bookLanguage[for1] 
+        }
+
+        else{
+            times++
+        }
+
+    }
+
+    if(times > 0){
+        return alert("Você digitou um Nome inválido")
+    }
+    return alert(`Os idiomas do Livro ${nomeBook} São: ${idiomas}`)
 }
