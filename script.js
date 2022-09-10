@@ -8,32 +8,44 @@ let bookLanguage = []
 let choice = true
 let contador = 0
 let choice2
+let choice3
 
 
 
 while(choice){
-    choice2 = prompt("1 /// Cadastrar Livro /// 2 Procurar Livro Pelo Autor /// 3 Procurar Livros Pelo Ano /// 4 Procurar Livros de um Autor a partir de determinado Ano /// 5 Buscar um Livro pelo nome e seus Idiomas /// 6 Finalizar")
+    choice2 = prompt("1 /// Cadastrar Livro /// 2 Procurar Livros /// 3 Exibir Livros /// 4 Sair Da Biblioteca")
+
     if(choice2 == "1"){
         cadastro()
     }
 
     if(choice2 == "2"){
-        ShowBooksByAutor()
+        choice3 = prompt("1 Procurar por Autor /// 2 Procurar por Ano /// 3 Procurar pelo Autor e Ano /// 4 Procurar por Nome e ver idiomas disponiveis")
+        if(choice3 == "1"){
+            ShowBooksByAutor()
+        }
+
+        if(choice3 == "2"){
+            ShowBooksByYear()
+        }
+
+        if(choice3 == "3"){
+            ShowBooksByAutorAndYear()
+        }
+
+        if(choice3 == "4"){
+            ShowBooksByNameAndLanguage()
+        }
     }
 
     if(choice2 == "3"){
-        ShowBooksByYear()
+        choice3 = prompt("1 Exibir livros por Idioma /// 2 Exibir livros ordenados por Ano")
+        if(choice3 == "1"){
+            ShowAllBooksByLanguage()
+        }
     }
 
     if(choice2 == "4"){
-        ShowBooksByAutorAndYear()
-    }
-
-    if(choice2 == "5"){
-        ShowBooksByNameAndLanguage()
-    }
-
-    if(choice2 == "6"){
         choice = false
     }
 }
@@ -45,7 +57,6 @@ function cadastro(){
     bookLanguage[contador] = prompt("Cadastre o Idioma do Livro")
     contador++
 }
-
 
 function ShowBooksByAutor(){
     let contador2 = 0
@@ -135,4 +146,21 @@ function ShowBooksByNameAndLanguage(){
         return alert("Você digitou um Nome inválido")
     }
     return alert(`Os idiomas do Livro ${nomeBook} São: ${idiomas}`)
+}
+
+function ShowAllBooksByLanguage(){
+    let LivrosByIdioma = []
+    let order = 0
+    let idioma = prompt("Por qual idioma você quer filtrar ?")
+    for(let for2 = 0; for2 < bookLanguage.length; for2++){
+        if(idioma == bookLanguage[for2]){
+            LivrosByIdioma[order] = bookName[for2]
+            order++
+        }
+    }
+
+    if(order == 0){
+        return alert("Não possuem livros no idioma desejado")
+    }
+    return alert(`Os Livros listados no idioma ${idioma} são: ${LivrosByIdioma}`)
 }
