@@ -43,6 +43,10 @@ while(choice){
         if(choice3 == "1"){
             ShowAllBooksByLanguage()
         }
+
+        if(choice3 == "2"){
+            OrderByYear()
+        }
     }
 
     if(choice2 == "4"){
@@ -163,4 +167,23 @@ function ShowAllBooksByLanguage(){
         return alert("Não possuem livros no idioma desejado")
     }
     return alert(`Os Livros listados no idioma ${idioma} são: ${LivrosByIdioma}`)
+}
+
+function OrderByYear(){ 
+    let MaiorValor = 0
+    let MaiorValor2
+    for(var for3 = 0; for3 < bookName.length; for3++){
+        for(var for4 = 0; for4 < bookName.length; for4++){
+            if(bookYear[for4] > bookYear[for4 + 1]){
+               MaiorValor = bookYear[for4]
+               bookYear[for4] = bookYear[for4 + 1]
+               bookYear[for4 + 1] = MaiorValor
+
+                MaiorValor2 = bookName[for4]
+                bookName[for4] = bookName[for4 + 1]
+                bookName[for4 + 1] = MaiorValor2
+            }
+        }
+    }
+    return alert(`${bookName}  / ${bookYear}`)
 }
