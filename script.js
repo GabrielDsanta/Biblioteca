@@ -6,7 +6,6 @@ let bookWriter = []
 let bookLanguage = []
 
 let choice = true
-let contador = 0
 let choice2
 let choice3
 
@@ -55,26 +54,29 @@ while(choice){
 }
 
 function cadastro(){
-    bookName[contador] = prompt("Cadastre o nome do Livro")
-    bookYear[contador] = prompt("Cadastre o Ano do Livro")
-    bookWriter[contador] = prompt("Cadastre o Nome do Autor do Livro")
-    bookLanguage[contador] = prompt("Cadastre o Idioma do Livro")
-    contador++
+    bookName.push(prompt("Cadastre o nome do Livro"))
+    bookYear.push(prompt("Cadastre o Ano do Livro"))
+    bookWriter.push(prompt("Cadastre o Nome do Autor do Livro"))
+    bookLanguage.push(prompt("Cadastre o Idioma do Livro"))
 }
 
 function ShowBooksByAutor(){
-    let contador2 = 0
     let LivrosAutorX = []
     let autor = prompt("Qual o nome do Autor que você deseja ver os Livros ?")
-    for(let index = 0; index < bookWriter.length; index++){
-        if(autor == bookWriter[index]){
-            LivrosAutorX[contador2] = bookName[index]
-            contador2++
+
+    let finder = bookWriter.filter(function(AutorBook){
+        return AutorBook == autor
+    })
+
+        if(finder == autor){
+            let posicao = bookWriter.indexOf(autor)
+            LivrosAutorX.unshift(bookName[posicao])
         }
-    }
-    if(contador2 <= 0){
-        return alert("Você inseriu um Autor inválido")
-    }
+
+        else{
+            return alert("Você digitou um Autor inválido")
+        }
+
     return alert(`Os Livros do Autor ${autor}: ${LivrosAutorX}`)
 }
 
