@@ -172,6 +172,22 @@ function ShowAllBooksByLanguage(){
 
 
 function OrderByYear(){ 
-    let ordem = bookYear.sort()
-    return alert(`{${ordem}}`)
+    let SortBooksName = []
+    for(let i = 0; i < bookYear.length + 1; i++){
+        if(bookYear[i] > bookYear[i + 1]){
+            SortBooksName.unshift(bookName[i + 1])
+            SortBooksName.push(bookName[i])
+            SortBooksName.pop()
+        }
+
+        if(bookYear[i] < bookYear[i + 1]){
+            SortBooksName.unshift(bookName[i])
+            SortBooksName.push(bookName[i + 1])
+        }
+    }
+
+    let SortBooks = bookYear
+    SortBooks = SortBooks.sort()
+
+    return alert(`{${SortBooks}} {${SortBooksName}}`)
 }
