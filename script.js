@@ -8,6 +8,7 @@ let bookLanguage = []
 let choice = true
 let choice2
 let choice3
+let contador = 0
 
 
 
@@ -64,72 +65,57 @@ function ShowBooksByAutor(){
     let LivrosAutorX = []
     let autor = prompt("Qual o nome do Autor que você deseja ver os Livros ?")
 
-    let finder = bookWriter.filter(function(AutorBook){
-        return AutorBook == autor
-    })
+    bookWriter.forEach(VerificateWriter)
 
-        if(finder == autor){
-            let posicao = bookWriter.indexOf(autor)
-            LivrosAutorX.unshift(bookName[posicao])
+    function VerificateWriter(item, index){
+        if(item == autor){
+            LivrosAutorX.push(bookName[index])
         }
-
-        else{
-            return alert("Você digitou um Autor inválido")
-        }
-
+    }
+    
     return alert(`Os Livros do Autor ${autor}: ${LivrosAutorX}`)
 }
 
 function ShowBooksByYear(){
-    let contador3 = 0
     let LivrosAnoX = []
     let ano = prompt("Qual o Ano que você deseja ver os Livros ?")
-    for(let index3 = 0; index3 < bookYear.length; index3++){
-        if(ano == bookYear[index3]){
-            LivrosAnoX[contador3] = bookName[index3]
-            contador3++
-        }
-    }
 
-    if(contador3 <= 0){
-        return alert("Você inseriu um Ano inválido")
+    bookYear.forEach(VerificateYear)
+
+    function VerificateYear(item, index){
+        if(item == ano){
+            LivrosAnoX.push(bookName[index])
+        }
     }
 
     return alert(`Os Livros do Ano ${ano}: ${LivrosAnoX}`)
 }
 
 function ShowBooksByAutorAndYear(){
-    let contador4 = 0
-    let contador5 = 0
     let ano2
     let LivrosAnoAutorX = []
-    let Limite = 1
 
     let autor2 = prompt("Qual o nome do Autor ?")
-    for(let index4 = 0; index4 < Limite; index4++){
-        if(autor2 == bookWriter[index4]){
-            ano2 = prompt("A Partir de qual Ano você quer ver os livros desse Autor ?")
-            for(let index5 = 0; index5 < bookYear.length; index5++){
-                if(bookYear[index5] >= ano2){
-                    LivrosAnoAutorX[contador5] = bookName[index5]
-                    contador5++
-                }
 
-                if(contador5 <= 0){
-                    return alert("Você digitou um valor inválido")
-                }
-            }
-        }
+    let Verificate = bookWriter.indexOf(autor2)
 
-        else{
-            Limite++
-            contador4++
-        }
+    if(Verificate == false){
+        ano2 = prompt("A Partir de qual Ano você quer ver os livros desse Autor ?")
+
+        bookYear.forEach(AddBooksByXYear)
     }
 
-    if(contador4 > 0){
+    else{
         return alert("Você digitou um Autor inválido")
     }
+
+
+    function AddBooksByXYear(item, index){
+        if(item >= ano2){
+            LivrosAnoAutorX.push(bookName[index])
+        }
+    }
+
     return alert(`Os Livros do Autor ${autor2} a partir do Ano ${ano2} são: ${LivrosAnoAutorX}`)
 }
 
