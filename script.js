@@ -8,8 +8,6 @@ let bookLanguage = []
 let choice = true
 let choice2
 let choice3
-let contador = 0
-
 
 
 while(choice){
@@ -102,13 +100,20 @@ function ShowBooksByAutorAndYear(){
     if(Verificate == false){
         ano2 = prompt("A Partir de qual Ano você quer ver os livros desse Autor ?")
 
-        bookYear.forEach(AddBooksByXYear)
+        let VerificateYEar = bookYear.indexOf(ano2)
+
+        if(VerificateYEar == null || VerificateYEar < 0){
+            return alert(`O Autor ${autor2} não possui nenhum livro a partir desse Ano`)
+        }
+
+        else{
+            bookYear.forEach(AddBooksByXYear)
+        }
     }
 
     else{
         return alert("Você digitou um Autor inválido")
     }
-
 
     function AddBooksByXYear(item, index){
         if(item >= ano2){
@@ -120,23 +125,25 @@ function ShowBooksByAutorAndYear(){
 }
 
 function ShowBooksByNameAndLanguage(){
-    let times = 0
     let idiomas = []
     let nomeBook = prompt("Qual o nome do Livro ?")
-    for(let for1 = 0; for1 < bookName.length; for1++){
-        if(nomeBook == bookName[for1]){
-            idiomas[for1] = bookLanguage[for1] 
-        }
 
-        else{
-            times++
-        }
+    let VerificateName = bookName.indexOf(nomeBook)
 
+    if(VerificateName == null){
+        return alert(`Não possuimos nenhum Livro ${nomeBook} em nenhum Idioma`)
     }
 
-    if(times > 0){
-        return alert("Você digitou um Nome inválido")
+    else{
+        bookName.forEach(AddBooksByXLanguage)
     }
+
+    function AddBooksByXLanguage(item, index){
+        if(item == nomeBook){
+            idiomas.push(bookLanguage[index])
+        }
+    }
+
     return alert(`Os idiomas do Livro ${nomeBook} São: ${idiomas}`)
 }
 
