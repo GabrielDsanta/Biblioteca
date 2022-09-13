@@ -149,18 +149,24 @@ function ShowBooksByNameAndLanguage(){
 
 function ShowAllBooksByLanguage(){
     let LivrosByIdioma = []
-    let order = 0
     let idioma = prompt("Por qual idioma você quer filtrar ?")
-    for(let for2 = 0; for2 < bookLanguage.length; for2++){
-        if(idioma == bookLanguage[for2]){
-            LivrosByIdioma[order] = bookName[for2]
-            order++
+
+    let VerificateLanguage = bookLanguage.indexOf(idioma)
+
+    if(VerificateLanguage == null){
+        return alert(`Não possuimos nenhum Livro com o Idioma: ${idioma}`)
+    }
+
+    else{
+        bookLanguage.forEach(FilterBooksByLanguage)
+    }
+
+    function FilterBooksByLanguage(item, index){
+        if(item == idioma){
+            LivrosByIdioma.push(bookName[index])
         }
     }
 
-    if(order == 0){
-        return alert("Não possuem livros no idioma desejado")
-    }
     return alert(`Os Livros listados no idioma ${idioma} são: ${LivrosByIdioma}`)
 }
 
